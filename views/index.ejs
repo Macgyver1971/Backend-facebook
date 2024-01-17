@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap"
+rel="stylesheet">
+  <link rel = "stylesheet" href = "/style.css">
+  <title></title>
+</head>
+<body>
+  
+  <div class = "header-sec">
+    <img src =
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Facebook_logo_%282023%29.svg/2560px-Facebook_logo_%282023%29.svg.png"
+    width = "150px">
+  </div>
+  <div class = "create-post-div">
+    Create Post
+    <form method = "get" action = "/posts/create">
+      <button>
+        <div class= "plus-icon"></div>
+      </button>
+    </form>
+  </div>
+  <div>
+    <% for(let post of posts){ %>
+    <form method = "get" action = "/posts/<%=post.id%>" id = <%= post.id %>>
+    <div class = "post_container">
+      <div class = "post_header" onclick =
+    "document.getElementById('<%= post.id %>').submit()">
+        <h3>
+          <%= post.name %>
+        </h3>
+        <p>
+          <%= post.activity %>          
+        </p>
+      </div>
+      <p class = "post_time">
+       <%= post.postTime %>
+      </p>
+      <p class = "post_caption">
+       <%= post.postCaption %>
+      </p>
+      <% if(post.postImage){ %>
+      <img src = "<%= post.postImage %>" width="100%" onclick =
+    "document.getElementById('<%= post.id %>').submit()">
+      <% } %>
+      </form>
+      <div class = "likes_comments">
+      
+        <div class = "likes_count"
+        onclick="document.getElementById('like-form-<%= post.id %>').submit()">
+          <form method = "post" action = "/posts/like/<%=post.id%>?_method=PATCH" id = "like-form-<%= post.id %>">
+          <img src =
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcU0hP-3598qb2A3xkmbz4m8DUSvd2KAbyUA&usqp=CAU"
+          width = "30px">
+          <p>
+            <%= post.likes %> likes
+          </p>
+        </div>
+      </form>
+        <div class = "comments_count">
+          <img src =
+          "https://static.thenounproject.com/png/1314304-200.png"
+          width = "30px">
+          <p>
+            <%= post.comments %> comments
+          </p>
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </div>
+  <div class = "footer">
+    All copyright reserved MAGVYER©2024
+  </div>
+  <script src = "/script.js"></script>
+</body>
+</html>
+
+
+
+
